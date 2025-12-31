@@ -71,7 +71,7 @@ public class MainViewController {
         root.setBottom(bottomContainer);
 
         
-        Scene scene = new Scene(root, 1400, 900);
+        Scene scene = new Scene(root, 1200, 750);
         primaryStage.setScene(scene);
         primaryStage.show();
         
@@ -84,7 +84,7 @@ public class MainViewController {
      */
     private ToolBar createToolBar() {
         ToolBar toolBar = new ToolBar();
-        toolBar.setStyle("-fx-background-color: linear-gradient(to bottom, #ffffff, #f8f9fa); " +
+        toolBar.setStyle("-fx-background-color: #ffffff; " +
                         "-fx-padding: 10; -fx-spacing: 8; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;");
 
         // 选择文件夹按钮
@@ -195,7 +195,7 @@ public class MainViewController {
         rightPane.getChildren().addAll(codeLabel, codeTextArea);
 
         splitPane.getItems().addAll(leftPane, rightPane);
-        splitPane.setDividerPositions(0.28);
+        splitPane.setDividerPositions(0.30);
 
         return splitPane;
     }
@@ -206,7 +206,7 @@ public class MainViewController {
     private VBox createLogPanel() {
         VBox logPanel = new VBox(5);
         logPanel.setPadding(new Insets(10));
-        logPanel.setPrefHeight(150);
+        logPanel.setPrefHeight(120);
         logPanel.setStyle("-fx-background-color: #263238;");
         
         Label logLabel = new Label("📋 实时日志");
@@ -683,7 +683,7 @@ public class MainViewController {
                     String sourceCode;
                     if (javaFile.exists()) {
                         // 如果已经反编译过，直接读取.java文件
-                        sourceCode = Files.readString(javaFile.toPath());
+                        sourceCode = new String(Files.readAllBytes(javaFile.toPath()), java.nio.charset.StandardCharsets.UTF_8);
                         javafx.application.Platform.runLater(() -> {
                             codeTextArea.setText(sourceCode);
                             updateStatus("✓ 已加载: " + fileName);
@@ -714,7 +714,7 @@ public class MainViewController {
                 try {
                     File javaFile = new File(selectedDirectory, fileName);
                     if (javaFile.exists()) {
-                        String content = Files.readString(javaFile.toPath());
+                        String content = new String(Files.readAllBytes(javaFile.toPath()), java.nio.charset.StandardCharsets.UTF_8);
                         javafx.application.Platform.runLater(() -> {
                             codeTextArea.setText(content);
                             updateStatus("✓ 已加载: " + fileName);

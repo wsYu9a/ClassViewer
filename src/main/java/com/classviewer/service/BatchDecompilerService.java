@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Stream;
+import java.nio.file.Paths;
 
 /**
  * 批量反编译服务
@@ -95,7 +96,7 @@ public class BatchDecompilerService {
                 // 保存反编译结果
                 Path javaFile = getJavaFilePath(classFile);
                 Files.createDirectories(javaFile.getParent());
-                Files.writeString(javaFile, sourceCode);
+                Files.write(javaFile, sourceCode.getBytes(java.nio.charset.StandardCharsets.UTF_8));
                 
                 result.incrementSuccess();
                 result.addDecompiledFile(classFile.toString(), javaFile.toString());
@@ -127,7 +128,7 @@ public class BatchDecompilerService {
                     Path javaFile = getJavaFilePath(classFile);
                     synchronized (result) {
                         Files.createDirectories(javaFile.getParent());
-                        Files.writeString(javaFile, sourceCode);
+                        Files.write(javaFile, sourceCode.getBytes(java.nio.charset.StandardCharsets.UTF_8));
                     }
                     
                     result.incrementSuccess();
@@ -186,7 +187,7 @@ public class BatchDecompilerService {
     private Path getJavaFilePath(Path classFile) {
         String classPath = classFile.toString();
         String javaPath = classPath.substring(0, classPath.length() - 6) + ".java";
-        return Path.of(javaPath);
+        return Paths.get(javaPath);
     }
 
     /**
