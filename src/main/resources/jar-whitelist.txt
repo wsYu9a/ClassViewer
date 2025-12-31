@@ -1,0 +1,71 @@
+# JAR包过滤白名单配置
+# 包含以下关键词的JAR包将被跳过（不解压、不反编译）
+# 每行一个关键词，支持部分匹配
+
+# Spring框架相关
+spring-
+springframework
+
+# 持久层框架
+mybatis
+mybatis-spring
+hibernate-
+
+# 日志框架
+slf4j-
+logback-
+log4j-
+
+# JSON处理
+jackson-
+fastjson
+gson-
+
+# 数据库连接池和驱动
+druid-
+hikari
+mysql-connector
+postgresql-
+oracle-
+
+# Web容器
+tomcat-
+jetty-
+undertow-
+
+# 网络通信
+netty-
+httpclient
+okhttp
+
+# 工具类库
+commons-
+guava-
+hutool-
+
+# 测试框架
+junit
+mockito
+testng
+
+# AOP和代理
+aspectj
+cglib-
+javassist-
+
+# 缓存框架
+jedis-
+redisson-
+caffeine-
+
+# 消息队列
+kafka-
+rabbitmq-
+rocketmq-
+
+# 其他常用依赖
+lombok-
+servlet-api
+validation-api
+javax.
+jakarta.
